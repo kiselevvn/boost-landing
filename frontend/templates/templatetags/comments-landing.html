@@ -1,0 +1,23 @@
+{% if objects %}
+{% load static  %}
+
+<section id="comments" class="testimonials">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title" >
+      <h2 data-aos="fade-up" style="color:white;">Отзывы Наших Клиентов</h2>
+    </div>
+    <div class="owl-carousel testimonials-carousel">
+      {% for comment in objects %}
+        <div class="testimonial-item">
+          <h3>{{ comment.name }}</h3>
+          <p>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            {{ comment.text }}
+            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

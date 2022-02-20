@@ -1,0 +1,278 @@
+{% extends "layouts/landing-layout.html" %}
+
+{% load static extra_settings  %}
+
+
+{% block content  %}
+
+  <div id="page-wrapper">
+
+    <!-- Header -->
+      <header id="header" class="alt">
+        <h1><a href="index.html">Boost</a></h1>
+        <nav>
+          <a href="#menu">Меню</a>
+        </nav>
+      </header>
+
+    <!-- Menu -->
+      <nav id="menu">
+        <div class="inner">
+          <h2>Меню</h2>
+          <ul class="links">
+            <li><a href="#banner">Главная</a></li>
+            <li><a href="#one">О нас</a></li>
+            <li><a href="#csgo-boost">CS: GO</a></li>
+            <li><a href="#dota-boost">DOTA 2</a></li>
+            <li><a href="#footer">Оставить отзыв</a></li>
+          </ul>
+          <a href="#" class="close">Close</a>
+        </div>
+      </nav>
+
+    <!-- Banner -->
+      <section id="banner" style="background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url({% static 'images/boost-default-bg.png' %});">
+        <div class="inner">
+          {% comment %} <div class="logo"><span class="icon fa-gem"></span></div> {% endcomment %}
+          <h2>Буст аккаунтов</h2>
+          <p>Профессиональные услуги прокачки аккаунтов Dota 2 и CS:GO от бустеров мирового топа</p>
+          <div class="buttons">
+            <a href="#dota-boost" class="dota">
+              DOTA 2
+            </a>
+            <a href="#csgo-boost" class="csgo">
+              CS: GO
+            </a>
+          </div>
+        </div>
+      </section>
+
+    <!-- Wrapper -->
+      <section id="wrapper">
+
+        <!-- One -->
+          <section id="one" class="wrapper spotlight style1">
+            <div class="inner">
+              <a href="#" class="image"><img src="{% static 'images/luna.png' %}" alt="" /></a>
+              <div class="content">
+                <h2 class="major">Буст аккаунтов Dota 2</h2>
+                <p>Буст Dota 2 — это процесс повышения рейтинга MMR с участием профессионального игрока невероятно высокого уровня. Прокачка Dota 2 может быть двух основных типов: стандартная прокачка MMR и прокачка ранга Dota 2 в дуэте. </p>
+              </div>
+            </div>
+          </section>
+
+        <!-- Two -->
+          <section id="two" class="wrapper alt spotlight style2">
+            <div class="inner">
+              <a href="#" class="image"><img  src="{% static 'images/csgo-1.png' %}" alt="" /></a>
+              <div class="content">
+                <h2 class="major">Буст званий CS: GO</h2>
+                <p>Мы предоставляем быструю, дешевую и чистую прокачку кс го от профессиональных игроков. А поскольку у нас есть сильная команда бустеров, мы можем удерживать наши цены на низком уровне, чтобы обслуживать максимальное количество клиентов.</p>
+              </div>
+            </div>
+          </section>
+
+        <!-- Three -->
+          <section id="three" class="wrapper spotlight style3">
+            <div class="inner">
+              <a href="#" class="image"><img src="{% static 'images/like.png' %}" alt="" /></a>
+              <div class="content">
+                <h2 class="major">Наши преимущества</h2>
+                <p>Наш сервис работает очень быстро благодаря нашей системе распределения заказов между нашими бустерами. Подавляющее большинство заказов уже находятся в процессе прокачки ммр в течение 5 минут после покупки. Мы стараемся бежать как можно быстрее, чтобы вы как можно скорее получили свой ранг. Все это возможно благодаря нашим профессионалам в прокачке ммр рейтинга, которых мы тщательно отобрали для работы над нашим сервисом.</p>
+              </div>
+            </div>
+          </section>
+
+        <!-- Four -->
+          <section id="four" class="wrapper alt style1">
+            <div class="inner">
+
+              <div class="boost-calculator" >
+
+              <h2 id="dota-boost" class="major" style="text-align: center;">Dota 2 MMR Price Calculator</h2>
+
+              <h3>Выбор количества поинтов:</h3>
+              <div  class="mmr-selector">
+                <input
+                  id="self-mmr"
+                  type="range"
+                  min="1"
+                  max="8000"
+                  value="2500"
+                  data-rangeslider
+                >
+                <div class="mmr-selector__result">
+                  Текущий рейтинг: <output ></output>
+                </div>
+              </div>
+              <div class="mmr-selector">
+                <input
+                  id="desired-mmr"
+                  type="range"
+                  min="500"
+                  max="8000"
+                  step="50"
+                  value="4500"
+                  data-rangeslider
+                >
+                <div class="mmr-selector__result">
+                  Желаемый рейтинг: <output ></output>
+                </div>
+              </div>
+
+              {% if dota_services %}
+                <h3>Дополнительные услуги:</h3>
+                <div class="services">
+                  {% for service in dota_services %}
+                    <input
+                    class="service-checkbox dota-checkbox"
+                    type="checkbox"
+                    id="{{service.id}}-dota-service"
+                    name="{{service.id}}-dota-service"
+                    data-service-type="{% if service.percent_price %}percent{% else %}fixed{% endif %}"
+                    data-value="{% if service.percent_price %}{{service.percent_price}}{% else %}{{service.fixed_price}}{% endif %}">
+                    <label for="{{service.id}}-dota-service">
+                      {{service.name}}
+                      <span>
+                        {% if service.percent_price %}
+                          {{service.percent_price}}%
+                        {% else %}
+                          {{service.fixed_price}} руб.
+                        {% endif %}
+                      </span>
+                    </label>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <span class="boost-price" >Цена: <span id="dota-boost-price">3150</span> руб.</span>
+              </div>
+
+
+
+              {% if dota_comments %}
+                <h2 style="text-align: center;margin-top:2em;">Отзывы клиентов</h2>
+                <section class="features">
+                  {% for comment in dota_comments %}
+                    <article>
+                      <h3 class="major">{{comment.name}}</h3>
+                      <p>{{comment.text}}</p>
+                    </article>
+                  {% endfor %}
+                </section>
+              {% endif %}
+
+
+              <div class="boost-calculator"  style="margin-top:6em;">
+
+                <h2 id="csgo-boost" class="major" style="text-align: center;">CS: GO Price Calculator</h2>
+
+                <h3 style="margin-top:2em;">Текущее звание:</h3>
+
+                <select name="self-rank" id="self-rank">
+                  {% for csgo_price in csgo_prices %}
+                    <option value="{{csgo_price.price}}" data-order="{{csgo_price.order}}" data-pk="{{csgo_price.pk}}">{{csgo_price.order}}. {{csgo_price.name}}</option>
+                  {% endfor %}
+                </select>
+
+                <h3 style="margin-top:2em;">Нужное звание:</h3>
+
+                <select name="desired-rank" id="desired-rank">
+                  {% for csgo_price in csgo_prices %}
+                    <option value="{{csgo_price.price}}" data-order="{{csgo_price.order}}" data-pk="{{csgo_price.pk}}">{{csgo_price.order}}. {{csgo_price.name}}</option>
+                  {% endfor %}
+                </select>
+
+                {% if csgo_services %}
+                  <h3 style="margin-top:3em;">Дополнительные услуги:</h3>
+                  <div class="services">
+                    {% for service in csgo_services %}
+                      <input
+                      class="service-checkbox csgo-checkbox"
+                      type="checkbox"
+                      id="{{service.id}}-csgo-service"
+                      name="{{service.id}}-csgo-service"
+                      data-service-type="{% if service.percent_price %}percent{% else %}fixed{% endif %}"
+                      data-value="{% if service.percent_price %}{{service.percent_price}}{% else %}{{service.fixed_price}}{% endif %}">
+                      <label for="{{service.id}}-csgo-service">
+                        {{service.name}}
+                        <span>
+                          {% if service.percent_price %}
+                            {{service.percent_price}}%
+                          {% else %}
+                            {{service.fixed_price}} руб.
+                          {% endif %}
+                        </span>
+                      </label>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <span class="boost-price" >Цена: <span id="csgo-boost-price">0</span> руб.</span>
+                </div>
+
+
+                {% if csgo_comments %}
+                <h2 style="text-align: center;margin-top:2em;">Отзывы клиентов</h2>
+                <section class="features">
+                  {% for comment in csgo_comments %}
+                    <article>
+                      <h3 class="major">{{comment.name}}</h3>
+                      <p>{{comment.text}}</p>
+                    </article>
+                  {% endfor %}
+                </section>
+                {% endif %}
+
+            </div>
+          </section>
+
+      </section>
+
+    <!-- Footer -->
+      <section id="footer" style="background-size:cover;background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url({% static 'images/bg-2.jpg' %});">
+        <div class="inner">
+          <h2>Отзывы и предложения</h2>
+          <form method="post" >
+            {% csrf_token %}
+            <div class="fields">
+              <div class="field">
+                {{ form.category.label }}
+                {{ form.category }}
+              </div>
+              <div class="field">
+                {{ form.name.label }}
+                {{ form.name }}
+              </div>
+              <div class="field">
+                {{ form.text.label }}
+                {{ form.text }}
+              </div>
+            </div>
+
+            <ul class="actions">
+              <li><input type="submit"/></li>
+            </ul>
+          </form>
+          {% comment %} <ul class="contact">
+            <li class="icon solid fa-home">
+              Untitled Inc<br />
+              1234 Somewhere Road Suite #2894<br />
+              Nashville, TN 00000-0000
+            </li>
+            <li class="icon solid fa-phone">(000) 000-0000</li>
+            <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+            <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+            <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
+            <li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+          </ul>
+          <ul class="copyright">
+            <li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul> {% endcomment %}
+        </div>
+      </section>
+
+  </div>
+{% endblock %}
+
+{% block bottom %}
+  <script src="{% static 'js/landing.js' %}"></script>
+{% endblock %}

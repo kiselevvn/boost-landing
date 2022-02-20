@@ -1,0 +1,54 @@
+{% load static extra_settings %}
+
+
+<header>
+  <!-- header inner -->
+  <div class="header">
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+              <div class="full">
+                <div class="center-desk">
+                    <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="#"></a> </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+              <div class="menu-area">
+                <div class="limit-box">
+                    <nav class="main-menu">
+                      <ul class="menu-area-main">
+                          <li class="active"> <a href="#">Home</a> </li>
+                          <li> <a href="#about">About</a> </li>
+                          <li><a href="#plant">Plant</a></li>
+                          <li><a href="#gallery">Gallery</a></li>
+                          <li><a href="#contact">Contact Us</a></li>
+                          <li class="last"><a href="#"><img src="images/search_icon.png" alt="icon"/></a></li>
+                      </ul>
+                    </nav>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- end header inner -->
+</header>
+
+{% comment %}
+<header class="fixed w-screen text-gray-600 body-font bg-purple-800/75 z-50">
+  <div class="container  mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="hidden md:flex  title-font font-medium items-center text-white mb-4 md:mb-0">
+      <span class="ml-3 text-xl">Protected</span>
+    </a>
+    <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+      <a href="/" class="mx-2 text-white">Главная</a>
+      <a href="{% if request.path != "/" %}/{% endif%}#services" class="mx-2 text-white">Услуги</a>
+      <a href="{% if request.path != "/" %}/{% endif%}#news" class="mx-2 text-white">Новости</a>
+      <a class="mx-2 text-white">Вопрос ответ</a>
+      <a href="{% if request.path != "/" %}/{% endif%}#comments" class="mx-2 text-white">Отзывы</a>
+      <a href="{% if request.path != "/" %}/{% endif%}#contacts" class="mx-2 text-white">Контакты</a>
+    </nav>
+  </div>
+</header>
+ {% endcomment %}

@@ -1,0 +1,50 @@
+{% if objects %}
+{% load static %}
+
+
+  <section id="news" class="blog">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-aos="fade-up">Новости</h2>
+        </div>
+        <div class="row">
+          {% for object in objects %}
+             <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+                <article class="entry">
+                  <div class="entry-img">
+                  {% if object.picture %}
+                    <img src="{{ object.picture.url }}" alt="" class="img-fluid">
+                  {% else %}
+                    <img src="{% static '/img/blog-5.jpg' %%}" alt="" class="img-fluid">
+                  {% endif %}
+                  </div>
+                  <h2 class="entry-title">
+                    <a href="blog-single.html">{{ object.title }}</a>
+                  </h2>
+                  <div class="entry-meta">
+                    <ul>
+                      <li class="d-flex align-items-center">
+                        <i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="{{ object.date_created|date:'y-m-d' }}">{{ object.date_created|date:"d F Y" }}</time></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="entry-content">
+                    <p>
+                      {{ object.description }}
+                    </p>
+                    <div class="read-more">
+                      <a href="{% url 'news-detail' object.pk %}">Подробнее</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+          {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-5 col-lg-3">
+            <a href="{% url 'news-list' %}" class="btn d-block text-white" style="background-color:#ff5821;">Смотреть еще</a>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endif %}

@@ -1,0 +1,26 @@
+{% if objects %}
+  {% load static%}
+  <section id="services" class="values">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-aos="fade-up">Услуги</h2>
+        </div>
+        <div class="row">
+          {% for service in objects %}
+            <div class="col-md-6 d-flex align-items-stretch aos-init aos-animate pb-4" data-aos="fade-up">
+              {% if service.picture %}
+                <div class="card" style="background-image: url({{ service.picture.url }});">
+              {% else %}
+                <div class="card" style="background-image: url({% static 'img/values-2.jpg' %});">
+              {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title"><a href="">{{ service.title }}</a></h5>
+                  <p class="card-text">{{ service.description }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+{% endif %}
